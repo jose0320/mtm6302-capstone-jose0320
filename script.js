@@ -4,7 +4,6 @@ const dateInput = document.getElementById('date');
 const apodContainer = document.getElementById('apod-container');
 const favouritesContainer = document.getElementById('favourites-container');
 
-
 dateInput.max = new Date().toISOString().split("T")[0];
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -34,18 +33,28 @@ form.addEventListener("submit", async (e) => {
 });
 
 function displayAPOD(data) {
-  apodContainer.innerHTML = `
-    <div class="card shadow-sm">
-      <img src="${data.url}" class="card-img-top" alt="${data.title}" />
-      <div class="card-body">
-        <h5 class="card-title">${data.title}</h5>
-        <p class="card-text"><small class="text-muted">${data.date}</small></p>
-        <p class="card-text">${data.explanation}</p>
-        <a href="${data.hdurl}" class="btn btn-outline-secondary me-2" target="_blank">View HD Image</a>
-        <button class="btn btn-success" onclick="saveToFavourites('${data.date}')">Add to Favourites</button>
-      </div>
+  apodContainer.innerHTML = '';
+
+  const card = document.createElement("div");
+  card.className = "card shadow-sm";
+
+  card.innerHTML = `
+    <img src="${data.url}" class="card-img-top" alt="${data.title}" />
+    <div class="card-body">
+      <h5 class="card-title">${data.title}</h5>
+      <p class="card-text"><small class="text-muted">${data.date}</small></p>
+      <p class="card-text">${data.explanation}</p>
+      <a href="${data.hdurl}" class="btn btn-outline-secondary me-2" target="_blank">View HD Image</a>
+      <button class="btn btn-success">Add to Favourites</button>
     </div>
   `;
+
+  // Add event listener instead of inline onclick
+  card.querySelector("button").addEventListener("click", () => {
+    saveToFavourites(data.date);
+  });
+
+  apodContainer.appendChild(card);
 }
 
 function saveToFavourites(date) {
@@ -69,6 +78,7 @@ async function displayFavourites() {
 
       const card = document.createElement("div");
       card.className = "col";
+
       card.innerHTML = `
         <div class="card h-100 shadow-sm">
           <img src="${data.url}" class="card-img-top" alt="${data.title}" />
@@ -76,10 +86,16 @@ async function displayFavourites() {
             <h5 class="card-title">${data.title}</h5>
             <p class="card-text"><small class="text-muted">${data.date}</small></p>
             <a href="${data.hdurl}" class="btn btn-outline-secondary mb-2 mt-auto" target="_blank">HD Image</a>
-            <button class="btn btn-danger" onclick="removeFavourite('${data.date}')">Remove</button>
+            <button class="btn btn-danger">Remove</button>
           </div>
         </div>
       `;
+
+      // Event listener for remove button
+      card.querySelector("button").addEventListener("click", () => {
+        removeFavourite(date);
+      });
+
       favouritesContainer.appendChild(card);
     } catch (error) {
       console.error(`Error loading favourite for ${date}:`, error);
