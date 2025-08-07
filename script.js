@@ -7,7 +7,6 @@ const favouritesContainer = document.getElementById('favourites-container');
 
 dateInput.max = new Date().toISOString().split("T")[0];
 
-
 document.addEventListener("DOMContentLoaded", () => {
   displayFavourites();
 });

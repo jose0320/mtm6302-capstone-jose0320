@@ -1,17 +1,24 @@
 body {
-    font-family: 'Montserrat', sans-serif;
-    background-color: #ddfbeb;
-    color: #212529;
-  }
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  background-color: #ccff67;
+  color: #212529;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  text-align: center;
+}
   
- 
+
   h1, h2 {
-    font-weight: 700;
+    font-weight: 900;
     text-align: center;
     margin-bottom: 1rem;
   }
   
-
   .card {
     border-radius: 10px;
     overflow: hidden;
@@ -23,18 +30,15 @@ body {
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
   }
   
- 
   .card-img-top {
     max-height: 400px;
     object-fit: cover;
   }
   
-
   #apod-container .card {
     margin-bottom: 2rem;
   }
   
-
   .card .btn {
     width: 100%;
   }
@@ -43,8 +47,9 @@ body {
     margin-top: 0.5rem;
   }
   
-
   form input[type="date"] {
     max-width: 250px;
   }
+
+  
   
